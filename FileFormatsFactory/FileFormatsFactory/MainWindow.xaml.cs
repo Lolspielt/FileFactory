@@ -8,8 +8,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
-using static System.Net.WebRequestMethods;
-
 namespace FileFormatsFactory;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -81,21 +79,11 @@ public partial class MainWindow : Window
 
   private void TxtFoldername_TextChanged(object sender, TextChangedEventArgs e)
   {
-    try
+    string type = panTypes.Children.OfType<RadioButton>().First(x => x.IsChecked ?? false).Content.ToString() ?? "";
+
+    foreach (var button in panRead.Children.OfType<Button>())
     {
-      string[] files = Directory.GetFiles(txtFoldername.Text);
-      string type = panTypes.Children.OfType<RadioButton>().First(x => x.IsChecked ?? false).Content.ToString() ?? "";
-      foreach (var button in panRead.Children.OfType<Button>())
-      {
-        button.IsEnabled = files.Any(x => x.EndsWith($"{type}.{button.Content}"));
-      }
-    }
-    catch 
-    {
-      foreach (var button in panRead.Children.OfType<Button>())
-      {
-        button.IsEnabled = false;
-      }
+      button.IsEnabled = File.Exists($"{txtFoldername.Text}/{type}.{button.Content}");
     }
   }
 }
