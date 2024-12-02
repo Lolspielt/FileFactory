@@ -29,10 +29,11 @@ public partial class MainWindow : Window
       button.Click += (s, e) =>
       {
         var parser = ParserFactory<Person>.Instance.Create(parserName);
-        lblFilename.Content ="Filename: " + txtFoldername.Text + "/persons." + parserName;
-        var items = parser.Parse(lblFilename.Content.ToString() ?? "");
+        string fileName = txtFoldername.Text + "/persons." + parserName;
+        lblFilename.Content ="Filename: " + fileName;
+        var items = parser.Parse(fileName);
         lstResult.ItemsSource = items;
-        lblMessage.Content = $"{items.Count} persons loaded from {lblFilename.Content}.{parserName}";
+        lblMessage.Content = $"{items.Count} persons loaded from {fileName}";
       };
       panRead.Children.Add(button);
       button = new Button { Content = parserName, Margin = new() {Left = 2, Right = 2} };
