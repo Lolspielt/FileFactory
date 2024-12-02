@@ -25,11 +25,11 @@
     <DockPanel DockPanel.Dock="Top" >
       <Label DockPanel.Dock="Left" Content="Type: " Grid.Row="2" Grid.Column="0" />
       <StackPanel Orientation="Horizontal" Name="panTypes" />
-    </DockPanel>
+        </DockPanel>
     <DockPanel DockPanel.Dock="Top" >
       <Label DockPanel.Dock="Left" Content="Foldername: " Grid.Row="2" Grid.Column="0" />
       <Button DockPanel.Dock="Right" Content="  . . .  " Margin="2" Click="FileDialogButtonClick" />
-      <TextBox Margin="2" Name="txtFoldername"/>
+      <TextBox Margin="2" Name="txtFoldername" TextChanged="TxtFoldername_TextChanged"/>
     </DockPanel>
     <Label DockPanel.Dock="Top" Content="Filename: " Grid.Row="2" Grid.Column="0" Name="lblFilename"/>
 
